@@ -1,0 +1,42 @@
+# Node.js
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Environment
+.env
+
+# Build artifacts
+dist/
+build/
+
+# Docker
+*.log
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+.DS_Store
+
+# Testing and coverage
+coverage/
+.nyc_output/
+
+# Miscellaneous
+*.seed
+*.pid
+*.pid.lock

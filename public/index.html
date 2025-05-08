@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT Vehicle Status Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>MQTT Vehicle Status Tool</h1>
+        
+        <div class="form-section">
+            <h2>Send Status</h2>
+            <input type="text" id="vehicleId" placeholder="Enter Vehicle ID">
+            <input type="number" id="status" placeholder="Enter Status (any integer)">
+            <button onclick="sendStatus()">Send Status</button>
+            <p id="sendResult"></p>
+        </div>
+
+        <div class="status-section">
+            <h2>Check Latest Status</h2>
+            <input type="text" id="checkVehicleId" placeholder="Enter Vehicle ID">
+            <button onclick="checkStatus()">Check Status</button>
+            <div id="statusResult"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

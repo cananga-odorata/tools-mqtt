@@ -1,0 +1,24 @@
+{
+    "name": "tool-mqtt",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "node dist/app.js",
+        "build": "tsc",
+        "dev": "ts-node src/app.ts"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-async-handler": "^1.2.0",
+        "moment-timezone": "^0.5.40",
+        "mongoose": "^7.0.0",
+        "mqtt": "^4.3.7"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.17",
+        "@types/node": "^18.14.0",
+        "@types/ws": "^8.18.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.5"
+    }
+}
