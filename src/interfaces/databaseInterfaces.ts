@@ -5,3 +5,16 @@ export interface IVehicleStatus {
         status: number;
     };
 }
+
+export interface IVehicleHeartbeat {
+    vehicleId: string;
+    timestamp: Date;
+    rawData: {
+        mode: number;
+        temp: number;
+        battery: number;
+        usage_time_mn: number;
+        credit_remaining: number;
+        credit_overuse: number;
+    };
+}

@@ -11,7 +11,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
@@ -19,14 +19,11 @@ h1 {
     color: #333;
 }
 
-.form-section,
-.status-section {
+.form-section, .status-section, .heartbeat-section {
     margin: 20px 0;
 }
 
-input,
-select,
-button {
+input, select, button {
     display: block;
     width: 100%;
     padding: 10px;
@@ -47,8 +44,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-#sendResult,
-#statusResult {
+#sendResult, #statusResult, #heartbeatResult {
     margin-top: 10px;
     padding: 10px;
     border-radius: 4px;
