@@ -25,11 +25,11 @@ router.post('/send-status', asyncHandler(async (req, res) => {
             });
         });
 
-        const statusLog = new VehicleStatusModel({
-            vehicleId,
-            rawData: { status }
-        });
-        await statusLog.save();
+        // const statusLog = new VehicleStatusModel({
+        //     vehicleId,
+        //     rawData: { status }
+        // });
+        // await statusLog.save();
         res.json({ message: 'Status sent and logged successfully' });
         return;
     } catch (error) {
