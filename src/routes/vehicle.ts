@@ -7,14 +7,29 @@ import VehicleHeartbeatModel from '../database/models/VehicleHeartbeat';
 const router = express.Router();
 
 router.post('/send-status', asyncHandler(async (req, res) => {
-    const { vehicleId, status } = req.body;
+    const { vehicleId, status, model } = req.body;
 
-    if (!vehicleId || !Number.isInteger(status) || ![0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(status)) {
-        res.status(400).json({ error: 'Invalid vehicleId or status' });
+    // Basic validation
+    if (!vehicleId || (status === undefined && model === undefined)) {
+        res.status(400).json({ error: 'Invalid request: vehicleId and status or model are required' });
         return;
     }
 
-    const message = JSON.stringify({ status });
+    const messagePayload: { status?: number, model?: number } = {};
+    if (status !== undefined && Number.isInteger(status) && [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(status)) {
+        messagePayload.status = status;
+    }
+
+    if (model !== undefined && Number.isInteger(model)) {
+        messagePayload.model = model;
+    }
+
+    if (Object.keys(messagePayload).length === 0) {
+        res.status(400).json({ error: 'Invalid status or model value' });
+        return;
+    }
+
+    const message = JSON.stringify(messagePayload);
     const topic = `vehicle/${vehicleId}/wrstatus`;
 
     try {
@@ -25,24 +40,17 @@ router.post('/send-status', asyncHandler(async (req, res) => {
             });
         });
 
-        // const statusLog = new VehicleStatusModel({
-        //     vehicleId,
-        //     rawData: { status }
-        // });
-        // await statusLog.save();
-        res.json({ message: 'Status sent and logged successfully' });
-        return;
+        res.json({ message: 'Status/model sent and logged successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to send status' });
-        return;
+        res.status(500).json({ error: 'Failed to send status/model' });
     }
-}))
+}));
 
 router.get('/vehicle-statuses/:vehicleId/latest', asyncHandler(async (req, res) => {
     const { vehicleId } = req.params;
 
     const latestStatus = await VehicleStatusModel
-        .findOne({ vehicleId })
+        .findOne({ vehicleId, 'rawData.status': { $exists: true, $ne: null } })
         .sort({ timestamp: -1 })
         .exec();
 
@@ -55,6 +63,26 @@ router.get('/vehicle-statuses/:vehicleId/latest', asyncHandler(async (req, res) 
         vehicleId: latestStatus.vehicleId,
         status: latestStatus.rawData.status,
         timestamp: latestStatus.timestamp
+    });
+}));
+
+router.get('/vehicle-models/:vehicleId/latest', asyncHandler(async (req, res) => {
+    const { vehicleId } = req.params;
+
+    const latestModel = await VehicleStatusModel
+        .findOne({ vehicleId, 'rawData.model': { $exists: true, $ne: null } })
+        .sort({ timestamp: -1 })
+        .exec();
+
+    if (!latestModel) {
+        res.status(404).json({ error: 'No model found for this vehicle' });
+        return;
+    }
+
+    res.json({
+        vehicleId: latestModel.vehicleId,
+        model: latestModel.rawData.model,
+        timestamp: latestModel.timestamp
     });
 }));
 
@@ -75,10 +103,9 @@ router.get('/vehicle-heartbeats/:vehicleId/latest', asyncHandler(async (req, res
         vehicleId: latestHeartbeat.vehicleId,
         mode: latestHeartbeat.rawData.mode,
         temp: latestHeartbeat.rawData.temp,
-        battery: latestHeartbeat.rawData.battery,
-        usage_time_mn: latestHeartbeat.rawData.usage_time_mn,
-        credit_remaining: latestHeartbeat.rawData.credit_remaining,
-        credit_overuse: latestHeartbeat.rawData.credit_overuse,
+        voltage: latestHeartbeat.rawData.voltage,
+        usage_time_mn: latestHeartbeat.rawData.total_usage_time,
+        sesstion_usage: latestHeartbeat.rawData.sesstion_usage,
         timestamp: latestHeartbeat.timestamp
     });
 }));

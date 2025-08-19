@@ -13,23 +13,25 @@
         <div class="form-section">
             <h2>Send Status</h2>
             <input type="text" id="vehicleId" placeholder="Enter Vehicle ID">
-            <input type="number" id="status" placeholder="Enter Status (any integer)">
+            <input type="number" id="status" placeholder="Enter Status (1-9 integer)">
+            <input type="number" id="model" placeholder="Enter Model (1-9 integer)">
             <button onclick="sendStatus()">Send Status</button>
             <p id="sendResult"></p>
         </div>
 
-        <div class="status-section">
+        <!-- <div class="status-section">
             <h2>Check Latest Status</h2>
-            <input type="text" id="checkVehicleId" placeholder="Enter Vehicle ID">
+            <input type="text" id="checkVehicleId" placeholder="Enter Vehicle ID and see live data (5 Sec)">
             <button onclick="checkStatus()">Check Status</button>
             <div id="statusResult"></div>
-        </div>
+        </div> -->
 
-        <div class="heartbeat-section">
-            <h2>Check Latest Heartbeat</h2>
-            <input type="text" id="checkHeartbeatVehicleId" placeholder="Enter Vehicle ID">
-            <button onclick="checkHeartbeat()">Check Heartbeat</button>
+        <div class="realtime-section">
+            <h2>Real-time Data</h2>
+            <input type="text" id="realtimeVehicleId" placeholder="Enter Vehicle ID and see live data (5 Sec)">
             <div id="heartbeatResult"></div>
+            <div id="modelResult"></div>
+            <div id="statusResult"></div>
         </div>
     </div>
     <script src="script.js"></script>
