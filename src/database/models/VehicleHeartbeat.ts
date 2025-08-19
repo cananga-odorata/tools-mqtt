@@ -10,7 +10,7 @@ const VehicleHeartbeatSchema = new mongoose.Schema<IVehicleHeartbeat>({
         temp: { type: Number, required: true },
         voltage: { type: Number, required: true },
         total_usage_time: { type: Number, required: true },
-        session_usage: { type: Number, required: true },
+        sesstion_usage: { type: Number, required: true },
     },
 });
 

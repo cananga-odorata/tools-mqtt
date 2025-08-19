@@ -14,7 +14,8 @@ async function sendStatus() {
     const model = parseInt(modelInput);
 
     if (isNaN(status) && isNaN(model)) {
-        resultElement.innerHTML = "Please enter a valid integer for Status or Model";
+        resultElement.innerHTML =
+            "Please enter a valid integer for Status or Model";
         resultElement.style.color = "red";
         return;
     }
@@ -101,8 +102,12 @@ async function checkHeartbeat(vehicleId) {
                 Mode: ${data.mode}<br>
                 Temperature: ${data.temp}°C<br>
                 Voltage: ${data.voltage}V<br>
-                Total Usage Time: ${data.usage_time_mn} minutes<br>
-                Session Usage: ${data.session_usage} minutes<br>
+              Total Usage Time: ${data.usage_time_mn} seconds (${
+                (data.usage_time_mn / 60).toFixed(2)
+            } minutes) <br>
+Session Usage: ${data.sesstion_usage} seconds (${
+                (data.sesstion_usage / 60).toFixed(2)
+            } minutes) <br>
                 Timestamp: ${new Date(data.timestamp).toLocaleString()}
             `;
             resultElement.style.color = "black";
@@ -165,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
             checkHeartbeat(vehicleId);
             checkModel(vehicleId);
             checkStatus(vehicleId);
-            
+
             fetchInterval = setInterval(() => {
                 checkHeartbeat(vehicleId);
                 checkModel(vehicleId);
