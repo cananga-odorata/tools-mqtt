@@ -5,7 +5,7 @@ async function sendStatus() {
     const resultElement = document.getElementById("sendResult");
 
     if (!vehicleId) {
-        resultElement.innerHTML = "Please enter a vehicle ID";
+        resultElement.innerHTML = "Please enter a SerialNumber";
         resultElement.style.color = "red";
         return;
     }
@@ -67,7 +67,7 @@ async function checkStatus(vehicleId) {
         if (response.ok) {
             resultElement.innerHTML = `
                 <h4>Latest Status</h4>
-                Vehicle ID: ${data.vehicleId}<br>
+                SerialNumber: ${data.vehicleId}<br>
                 Status: ${data.status}<br>
                 Timestamp: ${new Date(data.timestamp).toLocaleString()}
             `;
@@ -98,7 +98,7 @@ async function checkHeartbeat(vehicleId) {
         if (response.ok) {
             resultElement.innerHTML = `
                 <h4>Latest Heartbeat</h4>
-                Vehicle ID: ${data.vehicleId}<br>
+                SerialNumber: ${data.vehicleId}<br>
                 Mode: ${data.mode}<br>
                 Temperature: ${data.temp}°C<br>
                 Voltage: ${data.voltage}V<br>
@@ -138,7 +138,7 @@ async function checkModel(vehicleId) {
             if (data.model !== undefined) {
                 resultElement.innerHTML = `
                     <h4>Latest Model</h4>
-                    Vehicle ID: ${data.vehicleId}<br>
+                    SerialNumber: ${data.vehicleId}<br>
                     Model: ${data.model}<br>
                     Timestamp: ${new Date(data.timestamp).toLocaleString()}
                 `;
