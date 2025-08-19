@@ -2,6 +2,7 @@ export interface IVehicleStatus {
     vehicleId: string;
     timestamp: Date;
     rawData: {
+        model: number;
         status: number;
     };
 }
@@ -12,9 +13,8 @@ export interface IVehicleHeartbeat {
     rawData: {
         mode: number;
         temp: number;
-        battery: number;
-        usage_time_mn: number;
-        credit_remaining: number;
-        credit_overuse: number;
+        voltage: number;
+        total_usage_time: number;
+        sesstion_usage: number;
     };
 }
