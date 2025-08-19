@@ -2,8 +2,6 @@ async function sendStatus() {
     const vehicleId = document.getElementById("vehicleId").value;
     const statusInput = document.getElementById("status").value;
     const modelInput = document.getElementById("model").value;
-    const status = parseInt(statusInput);
-    const model = parseInt(modelInput);
     const resultElement = document.getElementById("sendResult");
 
     if (!vehicleId) {
@@ -12,13 +10,19 @@ async function sendStatus() {
         return;
     }
 
-    if (isNaN(status)) {
-        resultElement.innerHTML = "Please enter a valid integer status";
+    const status = parseInt(statusInput);
+    const model = parseInt(modelInput);
+
+    if (isNaN(status) && isNaN(model)) {
+        resultElement.innerHTML = "Please enter a valid integer for Status or Model";
         resultElement.style.color = "red";
         return;
     }
 
-    const body = { vehicleId, status };
+    const body = { vehicleId };
+    if (!isNaN(status)) {
+        body.status = status;
+    }
     if (!isNaN(model)) {
         body.model = model;
     }
@@ -33,14 +37,14 @@ async function sendStatus() {
         const data = await response.json();
 
         if (response.ok) {
-            resultElement.innerHTML = "Status sent successfully!";
+            resultElement.innerHTML = "Data sent successfully!";
             resultElement.style.color = "green";
         } else {
-            resultElement.innerHTML = data.error || "Failed to send status";
+            resultElement.innerHTML = data.error || "Failed to send data";
             resultElement.style.color = "red";
         }
     } catch (error) {
-        resultElement.innerHTML = "Error sending status";
+        resultElement.innerHTML = "Error sending data";
         resultElement.style.color = "red";
     }
 }
