@@ -102,7 +102,7 @@ async function checkHeartbeat(vehicleId) {
                 Temperature: ${data.temp}°C<br>
                 Voltage: ${data.voltage}V<br>
                 Total Usage Time: ${data.usage_time_mn} minutes<br>
-                Session Usage: ${data.session_usage} minutes<br>
+                Session Usage: ${data.sesstion_usage} minutes<br>
                 Timestamp: ${new Date(data.timestamp).toLocaleString()}
             `;
             resultElement.style.color = "black";
